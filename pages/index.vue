@@ -1,5 +1,9 @@
 <template>
-  <div>
-    <h1>Index</h1>
-  </div>
+  <UPage>
+    <UPageHeader
+      title="Nuxt UI を使ったサンプルです"
+      description="UPageHeader のディスクリプションはこんな感じです。"
+      headline="Headline"
+    />
+  </UPage>
 </template>
