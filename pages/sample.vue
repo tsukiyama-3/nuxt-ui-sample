@@ -69,20 +69,74 @@ const select = (index: number) => {
 };
 
 const hero = [
-  { title: "Item 1", description: "Description 1" },
-  { title: "Item 2", description: "Description 2" },
-  { title: "Item 3", description: "Description 3" },
+  {
+    title: "TITLE 1",
+    description: "テキストテキストテキスト",
+    images: {
+      sm: "https://picsum.photos/390/693?random=1",
+      lg: "https://picsum.photos/1470/582?random=1",
+    },
+    url: "/",
+  },
+  {
+    title: "TITLE 2",
+    description: "テキストテキストテキスト",
+    images: {
+      sm: "https://picsum.photos/390/693?random=2",
+      lg: "https://picsum.photos/1470/582?random=2",
+    },
+    url: "/sample",
+  },
+  {
+    title: "TITLE 3",
+    description: "テキストテキストテキスト",
+    images: {
+      sm: "https://picsum.photos/390/693?random=3",
+      lg: "https://picsum.photos/1470/582?random=3",
+    },
+    url: "/hoge",
+  },
 ];
 </script>
 
 <template>
   <UPage>
     <section class="">
-      <UCarousel :items="hero" class="w-full max-w-md mx-auto" arrows>
+      <UCarousel
+        :items="hero"
+        dots
+        loop
+        :ui="{
+          item: 'basis-1/1',
+          controls: 'absolute bottom-4 inset-x-12',
+          dots: '-top-7',
+          dot: 'size-2',
+        }"
+        class="w-full mx-auto"
+      >
         <template #default="{ item }">
-          <div class="p-4 bg-white rounded-lg shadow">
-            <h3 class="text-lg font-bold">{{ item.title }}</h3>
-            <p class="text-sm text-gray-600">{{ item.description }}</p>
+          <div
+            :style="{
+              '--bg-sm': `url(${item.images.sm})`,
+              '--bg-lg': `url(${item.images.lg})`,
+            }"
+            class="custom-bg aspect-[9/16] sm:aspect-video bg-no-repeat bg-center flex space-y-8 flex-col items-center justify-center"
+          >
+            <hgroup
+              class="w-fit p-4 aspect-square flex flex-col items-center justify-center bg-gray-800 opacity-80"
+            >
+              <p class="text-sm text-white">{{ item.description }}</p>
+              <h1 class="text-lg font-bold text-white">{{ item.title }}</h1>
+            </hgroup>
+            <UButton
+              trailing-icon="i-lucide-chevron-right"
+              size="xl"
+              color="neutral"
+              variant="outline"
+              class="cursor-pointer rounded-none font-bold"
+            >
+              予約する
+            </UButton>
           </div>
         </template>
       </UCarousel>
@@ -149,7 +203,7 @@ const hero = [
               v-slot="{ item }"
               dots
               class="sm:hidden"
-              :loop="true"
+              loop
               :items="images"
               :ui="{
                 item: 'basis-1/1',
@@ -208,7 +262,7 @@ const hero = [
                 v-slot="{ item }"
                 dots
                 class="sm:hidden"
-                :loop="true"
+                loop
                 :items="images"
                 :ui="{
                   item: 'basis-1/1',
@@ -229,6 +283,7 @@ const hero = [
                   ref="carousel"
                   v-slot="{ item }"
                   :items="images"
+                  loop
                   class="w-full max-w-xl mx-auto"
                   @select="select"
                 >
@@ -284,7 +339,7 @@ const hero = [
                 v-slot="{ item }"
                 dots
                 class="sm:hidden"
-                :loop="true"
+                loop
                 :items="images"
                 :ui="{
                   item: 'basis-1/1',
@@ -377,3 +432,16 @@ const hero = [
     </section>
   </UPage>
 </template>
+
+<style scoped>
+.custom-bg {
+  background-image: var(--bg-sm);
+  background-size: cover;
+}
+
+@media (min-width: 640px) {
+  .custom-bg {
+    background-image: var(--bg-lg);
+  }
+}
+</style>
