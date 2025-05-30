@@ -1,0 +1,379 @@
+<script setup lang="ts">
+import type { AccordionItem } from "@nuxt/ui";
+
+const posts = ref([
+  {
+    title: "年末年始の休業日のお知らせ",
+    description: "Discover Nuxt Icon v1!",
+    image: "https://nuxt.com/assets/blog/nuxt-icon/cover.png",
+    date: "2024年12月25日",
+    class: "cursor-pointer",
+    badge: "NEWS",
+  },
+  {
+    title: "Nuxt 3.14",
+    description: "Nuxt 3.14 is out!",
+    image: "https://nuxt.com/assets/blog/v3.14.png",
+    date: "2024年11月20日",
+    class: "cursor-pointer",
+    badge: {
+      label: "NOTE",
+    },
+  },
+  {
+    title: "Nuxt 3.13",
+    description: "Nuxt 3.13 is out!",
+    image: "https://nuxt.com/assets/blog/v3.13.png",
+    date: "2024年10月12日",
+    class: "cursor-pointer",
+    badge: "NEWS",
+  },
+]);
+
+const items = ref<AccordionItem[]>([
+  {
+    label: "Icons",
+    icon: "i-lucide-smile",
+    content: "You have nothing to do, @nuxt/icon will handle it automatically.",
+  },
+  {
+    label: "Colors",
+    icon: "i-lucide-swatch-book",
+    content:
+      "Choose a primary and a neutral color from your Tailwind CSS theme.",
+  },
+  {
+    label: "Components",
+    icon: "i-lucide-box",
+    content:
+      "You can customize components by using the `class` / `ui` props or in your app.config.ts.",
+  },
+]);
+
+const images = [
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+];
+
+const carousel = useTemplateRef("carousel");
+const activeIndex = ref(0);
+
+const select = (index: number) => {
+  activeIndex.value = index;
+
+  carousel.value?.emblaApi?.scrollTo(index);
+};
+
+const hero = [
+  { title: "Item 1", description: "Description 1" },
+  { title: "Item 2", description: "Description 2" },
+  { title: "Item 3", description: "Description 3" },
+];
+</script>
+
+<template>
+  <UPage>
+    <section class="">
+      <UCarousel :items="hero" class="w-full max-w-md mx-auto" arrows>
+        <template #default="{ item }">
+          <div class="p-4 bg-white rounded-lg shadow">
+            <h3 class="text-lg font-bold">{{ item.title }}</h3>
+            <p class="text-sm text-gray-600">{{ item.description }}</p>
+          </div>
+        </template>
+      </UCarousel>
+    </section>
+
+    <section class="py-10 sm:px-8 space-y-10">
+      <h2 class="text-center text-2xl sm:text-4xl font-bold">NEWS</h2>
+      <div class="sm:hidden">
+        <UBlogPost
+          v-for="(post, index) in posts"
+          :key="index"
+          :title="post.title"
+          :description="post.description"
+          :badge="post.badge"
+          class="rounded-none"
+        />
+      </div>
+      <UBlogPosts class="hidden sm:grid" :posts="posts" />
+      <div class="text-center">
+        <UButton
+          trailing-icon="i-lucide-chevron-right"
+          size="xl"
+          color="neutral"
+          variant="outline"
+          class="cursor-pointer rounded-none"
+        >
+          すべてニュースを見る
+        </UButton>
+      </div>
+    </section>
+
+    <section class="max-w-[1200px] mx-auto">
+      <USeparator />
+
+      <!-- ABOUT -->
+      <section class="py-10 space-y-10 max-w-[1200px] mx-auto">
+        <h2 class="text-center text-2xl sm:text-4xl font-bold">ABOUT</h2>
+        <div class="space-y-20">
+          <div
+            class="grid grid-cols-1 items-center px-8 sm:grid-cols-2 gap-y-8 gap-x-16"
+          >
+            <div class="grid grid-cols-4 sm:order-2 gap-x-4">
+              <div class="bg-gray-500 h-[80px] w-full max-w-[120px]" />
+              <div class="bg-gray-500 h-[80px] w-full max-w-[120px]" />
+              <div class="bg-gray-500 h-[80px] w-full max-w-[120px]" />
+              <div class="bg-gray-500 h-[80px] w-full max-w-[120px]" />
+            </div>
+            <div class="space-y-4 sm:order-1">
+              <hgroup class="space-y-2">
+                <p class="text-sm">
+                  あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、
+                </p>
+                <h3 class="text-xl sm:text-3xl">
+                  テキストテキストテキストテキストテキストテキスト
+                </h3>
+              </hgroup>
+              <p>
+                あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+              </p>
+            </div>
+          </div>
+          <div>
+            <UCarousel
+              v-slot="{ item }"
+              dots
+              class="sm:hidden"
+              :loop="true"
+              :items="images"
+              :ui="{
+                item: 'basis-1/1',
+                controls: 'absolute bottom-4 inset-x-12',
+                dots: '-top-7',
+                dot: 'size-2',
+              }"
+            >
+              <img
+                :src="item"
+                width="343"
+                height="240"
+                class="w-full aspect-video"
+              />
+            </UCarousel>
+            <div class="hidden sm:grid grid-cols-3 gap-x-4">
+              <img
+                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png"
+                alt=""
+              />
+              <img
+                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png"
+                alt=""
+              />
+              <img
+                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <UButton
+            trailing-icon="i-lucide-chevron-right"
+            size="xl"
+            color="neutral"
+            variant="outline"
+            class="cursor-pointer rounded-none"
+          >
+            ABOUTとは？
+          </UButton>
+        </div>
+      </section>
+
+      <USeparator />
+
+      <!-- FACILITY＆PRICE -->
+      <section class="py-10 sm:px-8 space-y-10 max-w-[1200px] mx-auto">
+        <h2 class="text-center text-2xl sm:text-4xl font-bold">
+          FACILITY＆PRICE
+        </h2>
+        <div class="space-y-16">
+          <section class="sm:grid grid-cols-2 gap-x-10 space-y-8">
+            <div>
+              <UCarousel
+                v-slot="{ item }"
+                dots
+                class="sm:hidden"
+                :loop="true"
+                :items="images"
+                :ui="{
+                  item: 'basis-1/1',
+                  controls: 'absolute bottom-4 inset-x-12',
+                  dots: '-top-7',
+                  dot: 'size-2',
+                }"
+              >
+                <img
+                  :src="item"
+                  width="343"
+                  height="240"
+                  class="w-full aspect-video"
+                />
+              </UCarousel>
+              <div class="hidden sm:block">
+                <UCarousel
+                  ref="carousel"
+                  v-slot="{ item }"
+                  :items="images"
+                  class="w-full max-w-xl mx-auto"
+                  @select="select"
+                >
+                  <img :src="item" width="768" height="404" class="" />
+                </UCarousel>
+                <div class="flex gap-1 justify-between pt-1 max-w-xl mx-auto">
+                  <div
+                    v-for="(item, index) in images"
+                    :key="index"
+                    class="size-24 opacity-25 hover:opacity-100 transition-opacity"
+                    :class="{ 'opacity-100': activeIndex === index }"
+                    @click="select(index)"
+                  >
+                    <img :src="item" width="120" height="44" class="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="px-8">
+              <div class="pb-3 space-y-2 sm:pb-4">
+                <h3 class="font-semibold text-lg sm:text-3xl">新宿店</h3>
+                <p class="text-sm">〒111-1111 東京都新宿区1-1-1</p>
+              </div>
+              <USeparator />
+              <div class="space-y-8 sm:space-y-4 pt-4 sm:pt-4">
+                <div class="space-y-4">
+                  <p class="text-sm sm:text-xl">202X年X月、新宿にOPEN</p>
+                  <h4 class="text-xl font-bold sm:text-3xl">
+                    テキストテキストテキストテキストテキスト
+                  </h4>
+                  <p>
+                    あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+                  </p>
+                </div>
+                <div class="text-center">
+                  <UButton
+                    trailing-icon="i-lucide-chevron-right"
+                    size="xl"
+                    color="neutral"
+                    variant="outline"
+                    class="cursor-pointer rounded-none"
+                  >
+                    この施設の詳細を見る
+                  </UButton>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="sm:grid grid-cols-2 gap-x-10 space-y-8">
+            <div>
+              <UCarousel
+                v-slot="{ item }"
+                dots
+                class="sm:hidden"
+                :loop="true"
+                :items="images"
+                :ui="{
+                  item: 'basis-1/1',
+                  controls: 'absolute bottom-4 inset-x-12',
+                  dots: '-top-7',
+                  dot: 'size-2',
+                }"
+              >
+                <img
+                  :src="item"
+                  width="343"
+                  height="240"
+                  class="w-full aspect-video"
+                />
+              </UCarousel>
+              <div class="hidden sm:block">
+                <UCarousel
+                  ref="carousel"
+                  v-slot="{ item }"
+                  :items="images"
+                  class="w-full max-w-xl mx-auto"
+                  @select="select"
+                >
+                  <img :src="item" width="768" height="404" class="" />
+                </UCarousel>
+                <div class="flex gap-1 justify-between pt-1 max-w-xl mx-auto">
+                  <div
+                    v-for="(item, index) in images"
+                    :key="index"
+                    class="size-24 opacity-25 hover:opacity-100 transition-opacity"
+                    :class="{ 'opacity-100': activeIndex === index }"
+                    @click="select(index)"
+                  >
+                    <img :src="item" width="120" height="44" class="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="px-8">
+              <div class="pb-3 space-y-2 sm:pb-4">
+                <h3 class="font-semibold text-lg sm:text-3xl">渋谷店</h3>
+                <p class="text-sm">〒111-1111 東京都渋谷区1-1-1</p>
+              </div>
+              <USeparator />
+              <div class="space-y-8 sm:space-y-4 pt-4 sm:pt-4">
+                <div class="space-y-4">
+                  <p class="text-sm sm:text-xl">202X年X月、渋谷にOPEN</p>
+                  <h4 class="text-xl font-bold sm:text-3xl">
+                    テキストテキストテキストテキストテキスト
+                  </h4>
+                  <p>
+                    あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+                  </p>
+                </div>
+                <div class="text-center">
+                  <UButton
+                    trailing-icon="i-lucide-chevron-right"
+                    size="xl"
+                    color="neutral"
+                    variant="outline"
+                    class="cursor-pointer rounded-none"
+                  >
+                    この施設の詳細を見る
+                  </UButton>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <USeparator />
+
+      <!-- FAQ -->
+      <section class="py-10 px-4 sm:px-8 space-y-10 max-w-[1200px] mx-auto">
+        <h2 class="text-center text-2xl sm:text-4xl font-bold">FAQ</h2>
+        <UAccordion :items="items" />
+        <div class="text-center">
+          <UButton
+            trailing-icon="i-lucide-chevron-right"
+            size="xl"
+            color="neutral"
+            variant="outline"
+            class="cursor-pointer rounded-none"
+          >
+            FAQ一覧
+          </UButton>
+        </div>
+      </section>
+    </section>
+  </UPage>
+</template>

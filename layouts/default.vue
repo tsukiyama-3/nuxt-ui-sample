@@ -5,26 +5,20 @@ const route = useRoute()
 
 const items = computed<NavigationMenuItem[]>(() => [
   {
-    label: 'Docs',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started'),
+    label: 'SAMPLE',
+    to: '/sample',
+    active: route.path.startsWith('/sample'),
   },
   {
-    label: 'Components',
-    to: '/components',
-    active: route.path.startsWith('/components'),
+    label: 'サービス一覧',
+    to: '/fuga',
   },
   {
-    label: 'Roadmap',
-    to: '/roadmap',
+    label: '注文の流れ',
+    to: '/hoge',
   },
   {
-    label: 'Figma',
-    to: 'https://www.figma.com/community/file/1288455405058138934',
-    target: '_blank',
-  },
-  {
-    label: 'Releases',
+    label: 'ニュース',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank',
   },
@@ -60,7 +54,7 @@ const items = computed<NavigationMenuItem[]>(() => [
         />
       </template>
     </UHeader>
-    <UMain class="max-w-[832px] px-4 mx-auto">
+    <UMain>
       <slot />
     </UMain>
   </div>
