@@ -5,7 +5,8 @@ const posts = ref([
   {
     title: "年末年始の休業日のお知らせ",
     description: "Discover Nuxt Icon v1!",
-    image: "https://nuxt.com/assets/blog/nuxt-icon/cover.png",
+    image:
+      "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
     date: "2024年12月25日",
     class: "cursor-pointer",
     badge: "NEWS",
@@ -13,7 +14,8 @@ const posts = ref([
   {
     title: "Nuxt 3.14",
     description: "Nuxt 3.14 is out!",
-    image: "https://nuxt.com/assets/blog/v3.14.png",
+    image:
+      "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
     date: "2024年11月20日",
     class: "cursor-pointer",
     badge: {
@@ -23,7 +25,8 @@ const posts = ref([
   {
     title: "Nuxt 3.13",
     description: "Nuxt 3.13 is out!",
-    image: "https://nuxt.com/assets/blog/v3.13.png",
+    image:
+      "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
     date: "2024年10月12日",
     class: "cursor-pointer",
     badge: "NEWS",
@@ -51,12 +54,12 @@ const items = ref<AccordionItem[]>([
 ]);
 
 const images = [
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_9_i6pmsx.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_10_ju8jyx.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
 ];
 
 const carousel = useTemplateRef("carousel");
@@ -221,15 +224,15 @@ const hero = [
             </UCarousel>
             <div class="hidden sm:grid grid-cols-3 gap-x-4">
               <img
-                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png"
+                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png"
                 alt=""
               />
               <img
-                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png"
+                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png"
                 alt=""
               />
               <img
-                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1704624998/zenn/view-transition-api/Frame_2_yjt73r.png"
+                src="https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png"
                 alt=""
               />
             </div>
