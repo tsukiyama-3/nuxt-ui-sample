@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/ui-pro',
     '@nuxtjs/i18n',
+    '@nuxthub/core'
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
