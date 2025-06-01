@@ -53,7 +53,7 @@ const items = ref<AccordionItem[]>([
   },
 ]);
 
-const images = [
+const images1 = [
   "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
   "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
   "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
@@ -62,13 +62,39 @@ const images = [
   "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
 ];
 
-const carousel = useTemplateRef("carousel");
-const activeIndex = ref(0);
+const images2 = [
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_9_i6pmsx.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_10_ju8jyx.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
+];
 
-const select = (index: number) => {
-  activeIndex.value = index;
+const images3 = [
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_9_i6pmsx.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_10_ju8jyx.png",
+  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
+];
 
-  carousel.value?.emblaApi?.scrollTo(index);
+const carousel1 = useTemplateRef("carousel1");
+const carousel2 = useTemplateRef("carousel2");
+const activeIndex1 = ref(0);
+const activeIndex2 = ref(0);
+
+const select1 = (index: number) => {
+  activeIndex1.value = index;
+
+  carousel1.value?.emblaApi?.scrollTo(index);
+};
+
+const select2 = (index: number) => {
+  activeIndex2.value = index;
+
+  carousel2.value?.emblaApi?.scrollTo(index);
 };
 
 const hero = [
@@ -207,7 +233,7 @@ const hero = [
               dots
               class="sm:hidden"
               loop
-              :items="images"
+              :items="images1"
               :ui="{
                 item: 'basis-1/1',
                 controls: 'absolute bottom-4 inset-x-12',
@@ -266,7 +292,7 @@ const hero = [
                 dots
                 class="sm:hidden"
                 loop
-                :items="images"
+                :items="images2"
                 :ui="{
                   item: 'basis-1/1',
                   controls: 'absolute bottom-4 inset-x-12',
@@ -283,22 +309,22 @@ const hero = [
               </UCarousel>
               <div class="hidden sm:block">
                 <UCarousel
-                  ref="carousel"
+                  ref="carousel1"
                   v-slot="{ item }"
-                  :items="images"
+                  :items="images2"
                   loop
                   class="w-full max-w-xl mx-auto"
-                  @select="select"
+                  @select="select1"
                 >
                   <img :src="item" width="768" height="404" class="" />
                 </UCarousel>
                 <div class="flex gap-1 justify-between pt-1 max-w-xl mx-auto">
                   <div
-                    v-for="(item, index) in images"
+                    v-for="(item, index) in images2"
                     :key="index"
                     class="size-24 opacity-25 hover:opacity-100 transition-opacity"
-                    :class="{ 'opacity-100': activeIndex === index }"
-                    @click="select(index)"
+                    :class="{ 'opacity-100': activeIndex1 === index }"
+                    @click="select1(index)"
                   >
                     <img :src="item" width="120" height="44" class="" />
                   </div>
@@ -343,7 +369,7 @@ const hero = [
                 dots
                 class="sm:hidden"
                 loop
-                :items="images"
+                :items="images3"
                 :ui="{
                   item: 'basis-1/1',
                   controls: 'absolute bottom-4 inset-x-12',
@@ -360,21 +386,21 @@ const hero = [
               </UCarousel>
               <div class="hidden sm:block">
                 <UCarousel
-                  ref="carousel"
+                  ref="carousel2"
                   v-slot="{ item }"
-                  :items="images"
+                  :items="images3"
                   class="w-full max-w-xl mx-auto"
-                  @select="select"
+                  @select="select2"
                 >
                   <img :src="item" width="768" height="404" class="" />
                 </UCarousel>
                 <div class="flex gap-1 justify-between pt-1 max-w-xl mx-auto">
                   <div
-                    v-for="(item, index) in images"
+                    v-for="(item, index) in images3"
                     :key="index"
                     class="size-24 opacity-25 hover:opacity-100 transition-opacity"
-                    :class="{ 'opacity-100': activeIndex === index }"
-                    @click="select(index)"
+                    :class="{ 'opacity-100': activeIndex2 === index }"
+                    @click="select2(index)"
                   >
                     <img :src="item" width="120" height="44" class="" />
                   </div>
