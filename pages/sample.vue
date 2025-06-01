@@ -1,101 +1,14 @@
 <script setup lang="ts">
-import type { AccordionItem } from "@nuxt/ui";
 
-const posts = ref([
-  {
-    title: "年末年始の休業日のお知らせ",
-    description: "Discover Nuxt Icon v1!",
-    image:
-      "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
-    date: "2024年12月25日",
-    class: "cursor-pointer",
-    badge: "NEWS",
-  },
-  {
-    title: "Nuxt 3.14",
-    description: "Nuxt 3.14 is out!",
-    image:
-      "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
-    date: "2024年11月20日",
-    class: "cursor-pointer",
-    badge: {
-      label: "NOTE",
-    },
-  },
-  {
-    title: "Nuxt 3.13",
-    description: "Nuxt 3.13 is out!",
-    image:
-      "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
-    date: "2024年10月12日",
-    class: "cursor-pointer",
-    badge: "NEWS",
-  },
-]);
+const { posts } = useArticles()
 
-const items = ref<AccordionItem[]>([
-  {
-    label: "Icons",
-    icon: "i-lucide-smile",
-    content: "You have nothing to do, @nuxt/icon will handle it automatically.",
-  },
-  {
-    label: "Colors",
-    icon: "i-lucide-swatch-book",
-    content:
-      "Choose a primary and a neutral color from your Tailwind CSS theme.",
-  },
-  {
-    label: "Components",
-    icon: "i-lucide-box",
-    content:
-      "You can customize components by using the `class` / `ui` props or in your app.config.ts.",
-  },
-]);
-
-const images1 = [
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_9_i6pmsx.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_10_ju8jyx.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
-];
-
-const images2 = [
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_9_i6pmsx.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_10_ju8jyx.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
-];
-
-const images3 = [
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662027/samples/MacBook_Air_-_1_nl9dag.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_7_s975o7.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662020/samples/MacBook_Air_-_8_hfrbql.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_9_i6pmsx.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_10_ju8jyx.png",
-  "https://res.cloudinary.com/dyoyv8djx/image/upload/v1748662021/samples/MacBook_Air_-_11_zrb5la.png",
-];
+const { items} = useAccordion()
 
 const carousel1 = useTemplateRef("carousel1");
 const carousel2 = useTemplateRef("carousel2");
-const activeIndex1 = ref(0);
-const activeIndex2 = ref(0);
-
-const select1 = (index: number) => {
-  activeIndex1.value = index;
-
-  carousel1.value?.emblaApi?.scrollTo(index);
-};
-
-const select2 = (index: number) => {
-  activeIndex2.value = index;
-
-  carousel2.value?.emblaApi?.scrollTo(index);
-};
+const { images: images1, activeIndex: activeIndex1, select: select1 } = useCarousel(carousel1)
+const { images: images2, activeIndex: activeIndex2, select: select2 } = useCarousel(carousel2)
+const { images: images3 } = useCarousel()
 
 const hero = [
   {
