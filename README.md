@@ -23,7 +23,7 @@ npm run dev
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 # nuxt-ui-sample
 
-Nuxt UI 所感
+## Nuxt UI 所感
 
 Tailwind CSS でスタイルを当てているため、スタイルの上書きは可能。
 なので、コンポーネントのスタイルを大幅に変更できる。
