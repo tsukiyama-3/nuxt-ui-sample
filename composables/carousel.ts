@@ -1,12 +1,3 @@
-import type { ShallowRef } from "vue";
-
-type EmblaCarouselType = {
-  emblaApi?: {
-    scrollTo: (index: number) => void;
-  };
-} & HTMLDivElement;
-
-
 export const useCarousel = (carousel?) => {
   const activeIndex = ref(0)
   const images = [

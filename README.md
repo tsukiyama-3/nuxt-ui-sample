@@ -9,15 +9,6 @@ Make sure to install dependencies:
 ```bash
 # npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -27,50 +18,21 @@ Start the development server on `http://localhost:3000`:
 ```bash
 # npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 # nuxt-ui-sample
+
+Nuxt UI 所感
+
+Tailwind CSS でスタイルを当てているため、スタイルの上書きは可能。
+なので、コンポーネントのスタイルを大幅に変更できる。
+
+一つのコンポーネントは粒度の小さい別の Nuxt UI のコンポーネントで構成されている(ことが多い)ため、既存のパーツで良いものが見つからない場合でも、自分で必要なコンポーネントを作成し、組み合わせることで柔軟に対応できる。
+
+コンポーネント内の見出しタグ（hタグ）のレベルも変更可能なため、ページ内の構造を適切に設定でき、SEO的にも問題が生じにくい。
+また、内部的にもセマンティックにマークアップされているので基本的なアクセビリティ対応をされている。
+
+表示するデータをどのように管理するかは難しそう。
+- テンプレート内に書くと煩雑になるのでcomposablesをコンポーネントごとに作る必要がある。
+- APIのレスポンスもそのまま使えない場合がありそうなのでconvert処理が必要。
