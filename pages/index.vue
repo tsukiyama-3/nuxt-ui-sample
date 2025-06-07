@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ja, en } from '@nuxt/ui/locale'
+import { useForm } from '~/composables/form'
+
 const { locale } = useI18n()
+const { model, schema, submit } = useForm()
 </script>
 
 <template>
@@ -23,7 +26,7 @@ const { locale } = useI18n()
 
     <!-- modal -->
     <section class="py-8 space-y-4">
-      <h2 class="text-2xl font-bold">modal</h2>
+      <h2 class="text-2xl font-bold">Modal</h2>
       <UModal
         title="Modal with description"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -36,6 +39,24 @@ const { locale } = useI18n()
           <div class="h-48 m-4" />
         </template>
       </UModal>
+    </section>
+
+    <!-- form -->
+    <section class="py-8 space-y-4">
+      <h2 class="text-2xl font-bold">Form</h2>
+      <UForm :schema="schema" :state="model" class="space-y-4" @submit="submit">
+        <UFormField label="メールアドレス" name="email" required>
+          <UInput v-model="model.email" />
+        </UFormField>
+
+        <UFormField label="パスワード" name="password" required>
+          <UInput v-model="model.password" />
+        </UFormField>
+
+        <UButton type="submit" class="font-bold">
+          送信
+        </UButton>
+      </UForm>
     </section>
   </UPage>
 </template>
