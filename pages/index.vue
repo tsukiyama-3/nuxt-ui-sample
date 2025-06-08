@@ -2,6 +2,17 @@
 import { ja, en } from '@nuxt/ui/locale'
 import { useForm } from '~/composables/form'
 
+useHead({
+  link: [
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Roboto:wght@700&display=swap',
+    },
+  ],
+})
+
 const { locale } = useI18n()
 const { model, schema, submit } = useForm()
 </script>
@@ -34,7 +45,7 @@ const { model, schema, submit } = useForm()
           class: 'cursor-pointer'
         }"
       >
-        <UButton label="開く" color="neutral" variant="subtle" class="cursor-pointer" />
+        <UButton label="開く" variant="subtle" class="cursor-pointer" />
         <template #body>
           <div class="h-48 m-4" />
         </template>
@@ -46,14 +57,14 @@ const { model, schema, submit } = useForm()
       <h2 class="text-2xl font-bold">Form</h2>
       <UForm :schema="schema" :state="model" class="space-y-4" @submit="submit">
         <UFormField label="メールアドレス" name="email" required>
-          <UInput v-model="model.email" />
+          <UInput v-model="model.email" type="email" />
         </UFormField>
 
         <UFormField label="パスワード" name="password" required>
-          <UInput v-model="model.password" />
+          <UInput v-model="model.password" type="password" />
         </UFormField>
 
-        <UButton type="submit" class="font-bold">
+        <UButton type="submit" class="font-bold cursor-pointer">
           送信
         </UButton>
       </UForm>
