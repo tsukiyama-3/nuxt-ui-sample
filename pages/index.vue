@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ja, en } from "@nuxt/ui-pro/locale";
 import { useForm } from "~/composables/form";
-import { useArticles } from "~/composables/articles";
+import { useArticles, useSample } from "~/composables/articles";
 
 useHead({
   link: [
@@ -21,6 +21,8 @@ useHead({
 const { locale, locales, setLocale } = useI18n();
 const { model, schema, submit } = useForm();
 const { articles } = await useArticles();
+
+const { data } = await useSample()
 </script>
 
 <template>
@@ -31,6 +33,7 @@ const { articles } = await useArticles();
       headline="ヘッドライン"
     />
     <USeparator />
+    <p>{{ data }}</p>
 
     <!-- i18n -->
     <section class="py-8 space-y-4">

@@ -9,3 +9,9 @@ export const useArticles = async () => {
 
   return { articles: data }
 }
+
+export const useSample = async () => {
+  const { data } = await useFetch('/api/translate')
+
+  return { data }
+}
