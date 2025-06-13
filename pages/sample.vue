@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { useArticles } from '~/composables/articles'
 
-const { posts } = useArticles()
+const { articles } = await useArticles()
 
 const { items} = useAccordion()
 
@@ -43,7 +44,7 @@ const hero = [
 
 <template>
   <UPage>
-    <section class="">
+    <section>
       <UCarousel
         :items="hero"
         dots
@@ -86,17 +87,19 @@ const hero = [
 
     <section class="py-10 sm:px-8 space-y-10">
       <h2 class="text-center text-2xl sm:text-4xl font-bold">NEWS</h2>
-      <div class="sm:hidden">
-        <UBlogPost
-          v-for="(post, index) in posts"
-          :key="index"
-          :title="post.title"
-          :description="post.description"
-          :badge="post.badge"
-          class="rounded-none"
-        />
+      <div v-if="articles">
+        <div class="sm:hidden">
+          <UBlogPost
+            v-for="(post, index) in articles"
+            :key="index"
+            :title="post.title"
+            :description="post.description"
+            :badge="post.badge"
+            class="rounded-none"
+          />
+        </div>
+        <UBlogPosts class="hidden sm:grid" :posts="articles" />
       </div>
-      <UBlogPosts class="hidden sm:grid" :posts="posts" />
       <div class="text-center">
         <UButton
           trailing-icon="i-lucide-chevron-right"

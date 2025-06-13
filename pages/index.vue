@@ -1,20 +1,26 @@
 <script setup lang="ts">
-import { ja, en } from '@nuxt/ui/locale'
-import { useForm } from '~/composables/form'
+import { ja, en } from "@nuxt/ui-pro/locale";
+import { useForm } from "~/composables/form";
+import { useArticles } from "~/composables/articles";
 
 useHead({
   link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+    { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Roboto:wght@700&display=swap',
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossorigin: "anonymous",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Roboto:wght@700&display=swap",
     },
   ],
-})
+});
 
-const { locale } = useI18n()
-const { model, schema, submit } = useForm()
+const { locale, locales, setLocale } = useI18n();
+const { model, schema, submit } = useForm();
+const { articles } = await useArticles();
 </script>
 
 <template>
@@ -31,8 +37,24 @@ const { model, schema, submit } = useForm()
       <h2 class="text-2xl font-bold">i18n</h2>
       <ULocaleSelect v-model="locale" :locales="[ja, en]" class="w-48" />
       <div class="space-y-4">
-        <p>{{ $t('welcome') }}</p>
+        <p>{{ $t("welcome") }}</p>
       </div>
+      <p>
+        ULocaleSelect
+        の挙動がおかしいので自前で言語セレクタを実装した方が良さそう。<br />
+        Nuxt UI Pro はオープンソースじゃないので原因がわからない。
+      </p>
+      <div class="flex gap-x-4">
+        <UButton
+          v-for="(locale, index) in locales"
+          :key="index"
+          :label="locale.name"
+          @click="setLocale(locale.code)"
+          class="cursor-pointer"
+        />
+      </div>
+      <h3 class="text-xl font-bold">APIレスポンス</h3>
+      <p>{{ articles }}</p>
     </section>
 
     <!-- modal -->
@@ -42,7 +64,7 @@ const { model, schema, submit } = useForm()
         title="Modal with description"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         :close="{
-          class: 'cursor-pointer'
+          class: 'cursor-pointer',
         }"
       >
         <UButton label="開く" variant="subtle" class="cursor-pointer" />
@@ -64,9 +86,7 @@ const { model, schema, submit } = useForm()
           <UInput v-model="model.password" type="password" />
         </UFormField>
 
-        <UButton type="submit" class="font-bold cursor-pointer">
-          送信
-        </UButton>
+        <UButton type="submit" class="font-bold cursor-pointer"> 送信 </UButton>
       </UForm>
     </section>
   </UPage>

@@ -11,11 +11,11 @@ const items = computed<NavigationMenuItem[]>(() => [
   },
   {
     label: 'サービス一覧',
-    to: '/fuga',
+    to: '/sample',
   },
   {
     label: '注文の流れ',
-    to: '/hoge',
+    to: '/sample',
   },
   {
     label: 'ニュース',
@@ -32,7 +32,7 @@ const items = computed<NavigationMenuItem[]>(() => [
         Nuxt UI Sample
       </template>
       <UNavigationMenu
-        lass="data-[orientation=vertical]:w-48"
+        class="data-[orientation=vertical]:w-48"
         :items="items"
       />
       <template #right>

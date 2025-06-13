@@ -16,11 +16,13 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'ja',
-        file: 'ja.json'
+        file: 'ja.json',
+        name: '日本語'
       },
       {
         code: 'en',
-        file: 'en.json'
+        file: 'en.json',
+        name: 'English'
       }
     ]
   }
