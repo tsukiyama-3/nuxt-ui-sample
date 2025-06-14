@@ -53,8 +53,9 @@ const { articles } = await useArticles();
           class="cursor-pointer"
         />
       </div>
-      <h3 class="text-xl font-bold">APIレスポンス</h3>
-      <p>{{ articles }}</p>
+      <h3 class="text-xl font-bold">ブログ</h3>
+      <UBlogPosts v-if="articles" class="hidden sm:grid" :posts="articles" />
+      <div v-if="articles" v-html="articles[0].title"></div>
     </section>
 
     <!-- modal -->

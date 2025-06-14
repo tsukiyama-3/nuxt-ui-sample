@@ -1,4 +1,5 @@
 import { TranslationServiceClient } from '@google-cloud/translate'
+import { Window } from 'happy-dom'
 import { z } from 'zod/v4'
 import type { Article as MicroCMSArticle } from '~/server/infrastructures/microcms/articles'
 
@@ -16,6 +17,7 @@ const articleSchema = z.object({
   contents: z.string(),
   image: z.url(),
   date: z.date(),
+  badge: z.string(),
 })
 
 type Article = z.infer<typeof articleSchema>
@@ -29,6 +31,7 @@ export const convert = (article: MicroCMSArticle): Article => {
     contents: article.contents,
     image: article.image,
     date: article.date,
+    badge: article.badge,
   }
 }
 
@@ -37,7 +40,7 @@ export const translate = async (article: Article): Promise<Article> => {
   const request = {
     parent: `projects/${projectId}/locations/${location}`,
     contents: [article.title, article.description, article.contents],
-    mimeType: 'text/html', // contents に HTML を含むため text/html を使用
+    mimeType: 'text/html',
     sourceLanguageCode: 'ja',
     targetLanguageCode: 'en',
   }
@@ -51,12 +54,24 @@ export const translate = async (article: Article): Promise<Article> => {
 
     return {
       ...article,
-      title: translations[0].translatedText || article.title,
-      description: translations[1].translatedText || article.description,
+      title: decode(translations[0].translatedText || article.title),
+      description: decode(translations[1].translatedText || article.description),
       contents: translations[2].translatedText || article.contents,
     }
   } catch (error) {
     console.error('翻訳に失敗しました', error)
     return article // 元のデータをそのまま返す
+  }
+}
+
+const decode = (contents: string) => {
+  const window = new Window()
+  try {
+    const docs = new window.DOMParser().parseFromString(contents, 'text/html')
+    console.log(docs.documentElement.textContent, 'docs')
+    return docs.documentElement.textContent || ''
+  } catch(error) {
+    console.error('デコードに失敗しました', error)
+    return contents
   }
 }
