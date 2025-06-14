@@ -42,7 +42,8 @@ const { articles } = await useArticles();
       <p>
         ULocaleSelect
         の挙動がおかしいので自前で言語セレクタを実装した方が良さそう。<br />
-        Nuxt UI Pro はオープンソースじゃないので原因がわからない。
+        Nuxt UI Pro はオープンソースじゃないので原因がわからない。<br />
+        ↓のボタンで言語選択できます。
       </p>
       <div class="flex gap-x-4">
         <UButton
@@ -53,8 +54,12 @@ const { articles } = await useArticles();
           class="cursor-pointer"
         />
       </div>
-      <h3 class="text-xl font-bold">APIレスポンス</h3>
-      <p>{{ articles }}</p>
+      <h3 class="text-xl font-bold">API レスポンス</h3>
+      <p>
+        {{ articles }}
+      </p>
+      <h3 class="text-xl font-bold">ブログ</h3>
+      <UBlogPosts v-if="articles" class="hidden sm:grid" :posts="articles" />
     </section>
 
     <!-- modal -->
