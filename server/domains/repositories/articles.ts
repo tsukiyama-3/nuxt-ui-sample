@@ -1,4 +1,4 @@
-import { getArticles as getArticlesFromMicroCMS } from '~/server/infrastructures/microcms/articles'
+import { getArticles as getArticlesFromMicroCMS, getArticle as getArticleFromMicroCMS } from '~/server/infrastructures/microcms/articles'
 import { convert, translate } from '~/server/domains/models/articles'
 
 // ドメインモデルへ変換して返却
@@ -17,4 +17,20 @@ export const getTranslatedArticles = async () => {
   const translated = await Promise.all(converted.map(translate))
 
   return { articles: translated }
+}
+
+export const getArticle = (id: string) => {
+  const { article } = getArticleFromMicroCMS(id)
+
+  return { article: convert(article) }
+}
+
+export const getTranslatedArticle = async (id: string) => {
+  const { article } = getArticleFromMicroCMS(id)
+
+  const converted = convert(article)
+
+  const translated = await translate(converted)
+
+  return { article: translated }
 }

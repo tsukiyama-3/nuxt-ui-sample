@@ -18,6 +18,7 @@ const articleSchema = z.object({
   image: z.url(),
   date: z.date(),
   badge: z.string(),
+  to: z.string(),
 })
 
 type Article = z.infer<typeof articleSchema>
@@ -32,6 +33,7 @@ export const convert = (article: MicroCMSArticle): Article => {
     image: article.image,
     date: article.date,
     badge: article.badge,
+    to: article.to
   }
 }
 

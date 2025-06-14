@@ -10,6 +10,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-05-15',
+  eslint: {
+    config: {
+      stylistic: true,
+    }
+  },
   runtimeConfig: {
     googleApplicationCredentials: ''
   },
@@ -31,5 +36,5 @@ export default defineNuxtConfig({
     bundle: {
       optimizeTranslationDirective: false,
     }
-  }
+  },
 })
