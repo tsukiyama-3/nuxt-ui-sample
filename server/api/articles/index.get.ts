@@ -1,9 +1,9 @@
-import { getTranslatedArticles } from '~/server/domains/repositories/articles'
+import { getArticles } from '~/server/domains/repositories/articles'
 
 export default defineCachedEventHandler(
   async (event) => {
     try {
-      const result = await getTranslatedArticles()
+      const result = getArticles()
       return result
     } catch (error) {
       throw error

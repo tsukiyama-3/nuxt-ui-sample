@@ -27,6 +27,9 @@ export default defineNuxtConfig({
         file: 'en.json',
         name: 'English'
       }
-    ]
+    ],
+    bundle: {
+      optimizeTranslationDirective: false,
+    }
   }
 })
