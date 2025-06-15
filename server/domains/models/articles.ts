@@ -66,6 +66,7 @@ export const translate = async (article: Article): Promise<Article> => {
   }
 }
 
+// 翻訳テキストをデコードする
 const decode = (contents: string) => {
   const window = new Window()
   try {
