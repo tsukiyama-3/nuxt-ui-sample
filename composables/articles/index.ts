@@ -12,6 +12,7 @@ export const useArticles = async () => {
 
 export const useArticle = async (id: string) => {
   const { locale } = useI18n()
+  // TODO: fetchOptionで渡せばエンドポイントで言語選択しなくて済む
   const { data } = await useFetch(`/api/articles/${id}/${locale.value === 'en' ? locale.value : ''}`, {
     default: () => null,
     transform: (response) => {
