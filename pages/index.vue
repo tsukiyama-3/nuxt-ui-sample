@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ja, en } from "@nuxt/ui-pro/locale";
 import { useForm } from "~/composables/form";
-import { useArticles, useMicroCMSArticle } from "~/composables/articles";
-
-const { data: microCMSArticle } = await useMicroCMSArticle()
+import { useArticles } from "~/composables/articles";
 
 useHead({
   link: [
@@ -27,7 +25,6 @@ const { articles } = await useArticles();
 
 <template>
   <UPage class="max-w-[832px] px-4 mx-auto">
-    <p>microCMSArticle: {{ microCMSArticle }}</p>
     <UPageHeader
       title="Nuxt UI を使ったサンプルです"
       description="UPageHeader のディスクリプションはこんな感じです。"

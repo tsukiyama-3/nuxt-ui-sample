@@ -16,10 +16,6 @@ export default defineNuxtConfig({
       stylistic: true,
     }
   },
-  microCMS: {
-    serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
-    apiKey: process.env.MICROCMS_API_KEY,
-  },
   runtimeConfig: {
     googleApplicationCredentials: ''
   },

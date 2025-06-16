@@ -22,14 +22,3 @@ export const useArticle = async (id: string) => {
 
   return { article: data.value }
 }
-
-export const useMicroCMSArticle = async () => {
-  const { data } = await useFetch('/api/v1/blogs', {
-    baseURL: 'https://nuxtjs-boilerplate.microcms.io',
-    headers: {
-      'X-MICROCMS-API-KEY': 'mTSmKdElJ8QtRly3XhSVV6ohXUT0pwcSWXeH'
-    }
-  })
-
-  return { data }
-}
