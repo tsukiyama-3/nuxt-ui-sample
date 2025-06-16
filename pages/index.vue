@@ -3,6 +3,11 @@ import { ja, en } from "@nuxt/ui-pro/locale";
 import { useForm } from "~/composables/form";
 import { useArticles } from "~/composables/articles";
 
+const { data } = await useMicroCMSGetList({
+  endpoint: "blogs",
+});
+console.log(data, 'blogs')
+
 useHead({
   link: [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,6 +30,7 @@ const { articles } = await useArticles();
 
 <template>
   <UPage class="max-w-[832px] px-4 mx-auto">
+    <p>data: {{ data }}</p>
     <UPageHeader
       title="Nuxt UI を使ったサンプルです"
       description="UPageHeader のディスクリプションはこんな感じです。"

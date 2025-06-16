@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/ui-pro',
     '@nuxtjs/i18n',
-    '@nuxthub/core'
+    '@nuxthub/core',
+    "nuxt-microcms-module",
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
@@ -14,6 +15,10 @@ export default defineNuxtConfig({
     config: {
       stylistic: true,
     }
+  },
+  microCMS: {
+    serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
+    apiKey: process.env.MICROCMS_API_KEY,
   },
   runtimeConfig: {
     googleApplicationCredentials: ''
