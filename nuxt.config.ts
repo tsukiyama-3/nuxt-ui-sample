@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     '@nuxtjs/i18n',
     '@nuxthub/core',
-    "nuxt-microcms-module",
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
@@ -17,7 +16,14 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    googleApplicationCredentials: ''
+    googleApplicationCredentials: '',
+    microcms: {
+      baseUrl: '',
+      apiKey: '',
+      endpoints: {
+        blogs: '/api/v1/blogs'
+      },
+    }
   },
   i18n: {
     langDir: 'locales',

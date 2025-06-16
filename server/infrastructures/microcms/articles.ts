@@ -14,7 +14,15 @@ const rawArticleSchema = z.object({
 export type Article = z.infer<typeof rawArticleSchema>
 
 // microcms から取得した記事をバリデーションして返す
-export const getArticles = () => {
+export const getArticles = async () => {
+  const { microcms } = useRuntimeConfig()
+  const response = await $fetch(microcms.endpoints.blogs, {
+    baseURL: microcms.baseUrl,
+    headers: {
+      'X-MICROCMS-API-KEY': microcms.apiKey
+    }
+  })
+  console.log(response, 'response')
   // 仮の記事
   // どんなレスポンスが来るかわからないため、かなり適当
   const articles: Article[] = [
