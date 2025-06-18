@@ -1,7 +1,7 @@
 import { TranslationServiceClient } from '@google-cloud/translate'
 import { Window } from 'happy-dom'
 import { z } from 'zod/v4'
-import type { Article as MicroCMSArticle } from '~/server/infrastructures/microcms/articles'
+import type { RawArticle as MicroCMSArticle } from '~/server/infrastructures/microcms/articles'
 
 const config = useRuntimeConfig();
 const translationClient = new TranslationServiceClient({
@@ -11,14 +11,11 @@ const projectId = 'massive-marker-416907';
 const location = 'global';
 
 const articleSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   title: z.string(),
-  description: z.string(),
-  contents: z.string(),
+  content: z.string(),
   image: z.url(),
   date: z.date(),
-  badge: z.string(),
-  to: z.string(),
 })
 
 type Article = z.infer<typeof articleSchema>
@@ -27,13 +24,10 @@ type Article = z.infer<typeof articleSchema>
 export const convert = (article: MicroCMSArticle): Article => {
   return {
     id: article.id,
-    title: article.subject,
-    description: article.description,
-    contents: article.contents,
-    image: article.image,
-    date: article.date,
-    badge: article.badge,
-    to: article.to
+    title: article.title,
+    content: article.content,
+    image: article.eyecatch.url,
+    date: new Date(article.publishedAt),
   }
 }
 
@@ -41,7 +35,7 @@ export const convert = (article: MicroCMSArticle): Article => {
 export const translate = async (article: Article): Promise<Article> => {
   const request = {
     parent: `projects/${projectId}/locations/${location}`,
-    contents: [article.title, article.description, article.contents],
+    contents: [article.title, article.content],
     mimeType: 'text/html',
     sourceLanguageCode: 'ja',
     targetLanguageCode: 'en',
@@ -57,8 +51,7 @@ export const translate = async (article: Article): Promise<Article> => {
     return {
       ...article,
       title: decode(translations[0].translatedText || article.title),
-      description: decode(translations[1].translatedText || article.description),
-      contents: translations[2].translatedText || article.contents,
+      content: translations[2].translatedText || article.content,
     }
   } catch (error) {
     console.error('翻訳に失敗しました', error)
@@ -71,7 +64,6 @@ const decode = (contents: string) => {
   const window = new Window()
   try {
     const docs = new window.DOMParser().parseFromString(contents, 'text/html')
-    console.log(docs.documentElement.textContent, 'docs')
     return docs.documentElement.textContent || ''
   } catch(error) {
     console.error('デコードに失敗しました', error)
