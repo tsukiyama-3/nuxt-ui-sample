@@ -1,22 +1,20 @@
 import { getArticles as getArticlesFromMicroCMS, getArticle as getArticleFromMicroCMS } from '~/server/infrastructures/microcms/articles'
 import { convert, translate } from '~/server/domains/models/articles'
+import type { ArticleQuery } from '~/server/domains/models/articles'
 
 // ドメインモデルへ変換して返却
-export const getArticles = async () => {
-  const { contents } = await getArticlesFromMicroCMS()
-
-  return { articles: contents.map(convert) }
-}
-
-// ドメインモデルへ変換して英語へ編訳して返却
-export const getTranslatedArticles = async () => {
-  const { contents } = await getArticlesFromMicroCMS()
+export const getArticles = async (query: ArticleQuery) => {
+  const { contents } = await getArticlesFromMicroCMS(query)
 
   const converted = contents.map(convert)
 
-  const translated = await Promise.all(converted.map(translate))
+  // locale が en だったら翻訳後レスポンスを返す
+  if (query.locale === 'en') {
+    const translated = await Promise.all(converted.map(translate))
+    return { articles: translated }
+  }
 
-  return { articles: translated }
+  return { articles: converted }
 }
 
 export const getArticle = (id: string) => {

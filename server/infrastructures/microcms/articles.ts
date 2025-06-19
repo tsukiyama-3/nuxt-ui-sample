@@ -27,14 +27,22 @@ const rawArticleSchema = z.object({
 
 export type RawArticle = z.infer<typeof rawArticleSchema>
 
+const querySchema = z.object({
+  limit: z.number(),
+  offset: z.number(),
+}).partial()
+
+type MicroCMSQuery = z.infer<typeof querySchema>
+
 // microcms から取得した記事をバリデーションして返す
-export const getArticles = async (): Promise<ContentsResponse<RawArticle>> => {
+export const getArticles = async (query: MicroCMSQuery): Promise<ContentsResponse<RawArticle>> => {
   const { microcms } = useRuntimeConfig()
   const response = await $fetch(microcms.endpoints.blogs, {
     baseURL: microcms.baseUrl,
     headers: {
       'X-MICROCMS-API-KEY': microcms.apiKey
-    }
+    },
+    query,
   })
 
   return parseContentsResponse(response, rawArticleSchema)

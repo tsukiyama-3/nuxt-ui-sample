@@ -20,6 +20,14 @@ const articleSchema = z.object({
 
 type Article = z.infer<typeof articleSchema>
 
+const querySchema = z.object({
+  offset: z.coerce.number(),
+  limit: z.coerce.number(),
+  locale: z.string(),
+}).partial()
+
+export type ArticleQuery = z.infer<typeof querySchema>
+
 // micro cms のレスポンスをドメインモデルへ変換する
 export const convert = (article: MicroCMSArticle): Article => {
   return {
@@ -69,4 +77,8 @@ const decode = (contents: string) => {
     console.error('デコードに失敗しました', error)
     return contents
   }
+}
+
+export const validateArticleQuery = (query: unknown): ArticleQuery => {
+  return querySchema.parse(query)
 }

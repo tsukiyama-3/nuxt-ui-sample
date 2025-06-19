@@ -1,13 +1,15 @@
 export const useArticles = async () => {
   const { locale } = useI18n()
-  const { data } = await useFetch(`/api/articles/${locale.value === 'en' ? locale.value : ''}`, {
-    default: () => null,
-    transform: (response) => {
-      return response.articles
-    },
+  const fetchOption = reactive({
+    query: { offset: 0, limit: 1, locale: locale.value },
+    default: () => ({
+      articles: [],
+      totalCount: 0,
+    })
   })
+  const { data } = await useFetch('/api/articles', fetchOption)
 
-  return { articles: data }
+  return { articles: computed(() => data.value.articles) }
 }
 
 export const useArticle = async (id: string) => {
