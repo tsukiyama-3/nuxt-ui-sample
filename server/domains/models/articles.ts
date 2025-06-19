@@ -44,14 +44,14 @@ export const translate = async (article: Article): Promise<Article> => {
   try {
     const [{ translations }] = await translationClient.translateText(request)
 
-    if (!translations || translations.length < 3) {
+    if (!translations || translations.length < 2) {
       throw new Error('翻訳結果が不完全です')
     }
 
     return {
       ...article,
       title: decode(translations[0].translatedText || article.title),
-      content: translations[2].translatedText || article.content,
+      content: translations[1].translatedText || article.content,
     }
   } catch (error) {
     console.error('翻訳に失敗しました', error)

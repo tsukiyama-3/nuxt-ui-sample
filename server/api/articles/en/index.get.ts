@@ -10,6 +10,6 @@ export default defineCachedEventHandler(
     }
   },
   {
-    maxAge: 0,
+    // maxAge: 0,
   },
 )
