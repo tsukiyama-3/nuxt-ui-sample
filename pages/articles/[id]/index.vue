@@ -8,7 +8,7 @@ const { article } = await useArticle(String(route.params.id))
 </script>
 
 <template>
-  <UPage class="max-w-[832px] px-4 mx-auto">
+  <UPage v-if="article" class="max-w-[832px] px-4 mx-auto">
     <div class="flex gap-x-4">
         <UButton
           v-for="(locale, index) in locales"
@@ -19,6 +19,6 @@ const { article } = await useArticle(String(route.params.id))
         />
       </div>
     <h1 class="font-bold text-3xl">{{ article.title }}</h1>
-    <article v-html="article.contents"></article>
+    <article v-html="article.content"></article>
   </UPage>
 </template>

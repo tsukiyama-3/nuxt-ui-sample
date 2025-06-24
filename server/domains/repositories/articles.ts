@@ -17,18 +17,15 @@ export const getArticles = async (query: ArticleQuery) => {
   return { articles: converted }
 }
 
-export const getArticle = (id: string) => {
-  const { article } = getArticleFromMicroCMS(id)
-
-  return { article: convert(article) }
-}
-
-export const getTranslatedArticle = async (id: string) => {
-  const { article } = getArticleFromMicroCMS(id)
+export const getArticle = async (id: string, query: ArticleQuery) => {
+  const { article } = await getArticleFromMicroCMS(id)
 
   const converted = convert(article)
 
-  const translated = await translate(converted)
+  if (query.locale === 'en') {
+    const translated = await translate(converted)
+    return translated
+  }
 
-  return { article: translated }
+  return converted
 }

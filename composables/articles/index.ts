@@ -1,7 +1,7 @@
 export const useArticles = async () => {
   const { locale } = useI18n()
   const fetchOption = reactive({
-    query: { offset: 0, limit: 1, locale: locale.value },
+    query: { offset: 0, limit: 10, locale: locale.value },
     default: () => ({
       articles: [],
       totalCount: 0,
@@ -14,13 +14,11 @@ export const useArticles = async () => {
 
 export const useArticle = async (id: string) => {
   const { locale } = useI18n()
-  // TODO: fetchOptionで渡せばエンドポイントで言語選択しなくて済む
-  const { data } = await useFetch(`/api/articles/${id}/${locale.value === 'en' ? locale.value : ''}`, {
-    default: () => null,
-    transform: (response) => {
-      return response.article
-    }
+  const fetchOption = reactive({
+    query: { locale: locale.value },
+    default: () => null
   })
+  const { data } = await useFetch(`/api/articles/${id}`, fetchOption)
 
   return { article: data.value }
 }
