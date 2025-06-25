@@ -5,11 +5,26 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/ui-pro',
     '@nuxtjs/i18n',
-    '@nuxthub/core'
+    '@nuxthub/core',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-05-15',
+  eslint: {
+    config: {
+      stylistic: true,
+    }
+  },
+  runtimeConfig: {
+    googleApplicationCredentials: '',
+    microcms: {
+      baseUrl: '',
+      apiKey: '',
+      endpoints: {
+        blogs: '/api/v1/blogs'
+      },
+    }
+  },
   i18n: {
     langDir: 'locales',
     defaultLocale: 'ja',
@@ -24,6 +39,9 @@ export default defineNuxtConfig({
         file: 'en.json',
         name: 'English'
       }
-    ]
-  }
+    ],
+    bundle: {
+      optimizeTranslationDirective: false,
+    }
+  },
 })
